@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Random random = new Random();
+        int randomNumber = random.Next(1, 101); // Losowanie liczby od 1 do 100
+        int attempts = 0;
+        bool hasGuessed = false;
+
+        Console.WriteLine("Witaj w grze zgadywania liczby!");
+        Console.WriteLine("Spróbuj odgadnąć liczbę od 1 do 100.");
+
+        while (!hasGuessed)
+        {
+            Console.Write("Podaj swoją propozycję: ");
+            string userInput = Console.ReadLine();
+
+            if (int.TryParse(userInput, out int userGuess))
+            {
+                attempts++;
+
+                if (userGuess < randomNumber)
+                {
+                    Console.WriteLine("Za mało. Spróbuj jeszcze raz.");
+                }
+                else if (userGuess > randomNumber)
+                {
+                    Console.WriteLine("Za dużo. Spróbuj jeszcze raz.");
+                }
+                else
+                {
+                    Console.WriteLine($"Gratulacje! Odgadłeś liczbę {randomNumber}!");
+                    Console.WriteLine($"Liczba prób: {attempts}");
+                    hasGuessed = true;
+                }
+            }
+            else
+            {
+                Console.WriteLine("To nie jest poprawna liczba. Spróbuj ponownie.");
+            }
+        }
+
+        Console.WriteLine("Dziękuję za grę! Naciśnij Enter, aby zakończyć.");
+        Console.ReadLine();
+    }
+}
